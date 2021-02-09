@@ -13,7 +13,7 @@ public class Driver extends JFrame {
     public Driver(String title) {
         super(title);
         this.getContentPane().add(new Grid(this));
-        this.setDefaultCloseOperation(3);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
         this.pack();
     }

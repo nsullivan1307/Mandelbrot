@@ -3,44 +3,35 @@
 // (powered by FernFlower decompiler)
 //
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.Timer;
+import java.io.Serial;
 
 public class Grid extends JPanel implements ActionListener, MouseListener, KeyListener {
+    @Serial
     private static final long serialVersionUID = 1L;
     public static final Dimension SCREEN = Toolkit.getDefaultToolkit().getScreenSize();
     private static final int WIDTH = (int) SCREEN.getWidth(), HEIGHT = (int) SCREEN.getHeight();
-    private boolean[][] out;
-    private double[][] real;
-    private double[][] img;
+    private final boolean[][] out;
+    private final double[][] real;
+    private final double[][] img;
     private double X_CENTER = 0.0D;
     private double Y_CENTER = 0.0D;
-    private JButton picture;
+    private final JButton picture;
     private long SCALE = (long) WIDTH/4;
     private final int cycle_power = 12;
     private final int cycles = (int)Math.pow(2.0D, cycle_power);
     private int count;
     private int numCalc;
-    private int[] colormap;
-    private BufferedImage screen;
-    private Timer time;
-    private JTextField xPos;
-    private JTextField yPos;
-    private JTextField scale;
-    private Font f;
-    private Driver frame;
+    private final int[] colormap;
+    private final BufferedImage screen;
+    private final Timer time;
+    private final JTextField xPos;
+    private final JTextField yPos;
+    private final JTextField scale;
+    private final Driver frame;
 
     public Grid(Driver frame) {
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -49,19 +40,19 @@ public class Grid extends JPanel implements ActionListener, MouseListener, KeyLi
         this.real = new double[WIDTH][HEIGHT];
         this.img = new double[WIDTH][HEIGHT];
         this.out = new boolean[WIDTH][HEIGHT];
-        this.f = new Font("Arial", Font.PLAIN, WIDTH/80);
+        Font f = new Font("Arial", Font.PLAIN, WIDTH / 80);
         this.xPos = new JTextField(6);
         this.xPos.addActionListener(this);
         this.xPos.setText("" + this.X_CENTER);
-        this.xPos.setFont(this.f);
+        this.xPos.setFont(f);
         this.yPos = new JTextField(6);
         this.yPos.addActionListener(this);
         this.yPos.setText("" + this.Y_CENTER);
-        this.yPos.setFont(this.f);
+        this.yPos.setFont(f);
         this.scale = new JTextField(6);
         this.scale.addActionListener(this);
         this.scale.setText("" + this.SCALE);
-        this.scale.setFont(this.f);
+        this.scale.setFont(f);
         this.picture = new JButton("Pic");
         this.picture.addActionListener(this);
         this.setNumCalc(0);
@@ -146,7 +137,7 @@ public class Grid extends JPanel implements ActionListener, MouseListener, KeyLi
             }
         }
 
-        page2D.drawImage(this.screen, (AffineTransform)null, (ImageObserver)null);
+        page2D.drawImage(this.screen, null, null);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -255,7 +246,6 @@ public class Grid extends JPanel implements ActionListener, MouseListener, KeyLi
             }
 
             this.time.start();
-        } else if (e.getKeyCode() == 32) {
         }
 
     }
